@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "MDN Wayback",
+  "description": "Browse the old style MDN Web Docs.",
+  "version": "0.0.1",
+  "icons": {
+    "32": "/images/favicon-32x32.png",
+    "48": "/images/favicon-48x48.png",
+    "512": "/images/favicon-512x512.png"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+M",
+        "mac": "MacCtrl+Shift+M"
+      }
+    }
+  },
+  "permissions": ["storage"],
+  "background": {
+    "service_worke": ["background.js"]
+  },
+  "action": {},
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  }
+}
