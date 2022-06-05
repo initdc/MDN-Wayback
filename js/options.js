@@ -47,5 +47,3 @@ async function onSubmitClick(e) {
   await crStorage.set({ [key]: value });
   console.log(key, value);
 }
-
-chrome.action.setPopup({ popup: "popup.html" });

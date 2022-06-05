@@ -12,23 +12,38 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     const hostname = location.hostname;
     const index = MDN_INSTANCES.indexOf(hostname);
     if (index !== -1) {
-      storage.get(MDN_KEYS[index], (result) => {
-        const dbHostname = result[MDN_KEYS[index]];
-        console.log(dbHostname);
-        location.hostname = dbHostname;
+      const key = MDN_KEYS[index];
+      storage.get([key], (result) => {
+        const dbHostname = result[key];
+        if (dbHostname) {
+          console.log(dbHostname);
+          const dbIndex = MDN_INSTANCES.indexOf(dbHostname);
+          if (dbIndex === 0) {
+            chrome.action.setBadgeText({ text: "" });
+            chrome.action.setIcon({ path: "/images/favicon-48x48.new.png" });
+          } else {
+            chrome.action.setBadgeText({ text: MDN_KEYS[dbIndex] });
+            chrome.action.setIcon({ path: "/images/favicon-48x48.png" });
+          }
 
-        // onClickedEvent not onClickedEvent()
-        chrome.action.onClicked.removeListener(onClickedEvent);
-        onClickedEvent = () => chrome.tabs.create({ url: location.href });
-        chrome.action.onClicked.addListener(onClickedEvent);
+          location.hostname = dbHostname;
+          // onClickedEvent not onClickedEvent()
+          chrome.action.onClicked.removeListener(onClickedEvent);
+          onClickedEvent = () => chrome.tabs.create({ url: location.href });
+          chrome.action.onClicked.addListener(onClickedEvent);
+        }
       });
     }
   } else {
     chrome.action.setPopup({ popup: "popup.html" });
+    chrome.action.setBadgeText({ text: "" });
+    chrome.action.setIcon({ path: "/images/favicon-48x48.png" });
   }
 });
 
 chrome.runtime.onInstalled.addListener(() => {
+  chrome.action.setPopup({ popup: "popup.html" });
+
   chrome.tabs.create({
     url: "options.html",
   });
