@@ -8,21 +8,36 @@
     "48": "/images/favicon-48x48.png",
     "512": "/images/favicon-512x512.png"
   },
+  "permissions": ["storage", "activeTab", "scripting"],
   "commands": {
-    "_execute_browser_action": {
+    "_execute_action": {
       "suggested_key": {
-        "default": "Ctrl+Shift+M",
-        "mac": "MacCtrl+Shift+M"
+        "default": "Ctrl+M",
+        "mac": "MacCtrl+M"
       }
     }
   },
-  "permissions": ["storage"],
   "background": {
-    "service_worke": ["background.js"]
+    "service_worker": "background.js"
   },
-  "action": {},
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://developer.mozilla.org/*",
+        "*://mdn1.moz.one/*",
+        "*://mdn3.moz.one/*"
+      ],
+      "js": ["content-script.js"],
+      "all_frames": true,
+      "match_about_blank": true,
+      "run_at": "document_start"
+    }
+  ],
   "options_ui": {
     "page": "options.html",
-    "open_in_tab": false
+    "open_in_tab": true
   }
 }

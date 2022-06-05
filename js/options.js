@@ -45,3 +45,16 @@ async function onSubmitClick(e) {
   storage.setItem(key, value);
   console.log(key, value);
 }
+
+console.log(chrome);
+console.log(localStorage);
+
+async function getCurrentTab() {
+  let queryOptions = { active: true, lastFocusedWindow: true };
+  // `tab` will either be a `tabs.Tab` instance or `undefined`.
+  let [tab] = await chrome.tabs.query(queryOptions);
+  console.log(tab);
+  return tab;
+}
+
+getCurrentTab()
