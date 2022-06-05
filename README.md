@@ -4,7 +4,7 @@
 
 ## Install
 
-<a alt="chrome" href=""><img alt="chrome" width="200px" src="images/chrome.png"></a>
+<a alt="chrome" href=""><img alt="chrome" width="200px" src="chrome.png"></a>
 
 ## Use
 
