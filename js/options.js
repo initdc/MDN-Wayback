@@ -1,7 +1,8 @@
 const MDN_KEYS = ["mozilla", "mdn1", "mdn3"];
-const MDN_INSTANCES = ["developer.mozilla.org", "mdn3.moz.one", "mdn1.moz.one"];
+const MDN_INSTANCES = ["developer.mozilla.org", "mdn1.moz.one", "mdn3.moz.one"];
 
 const storage = localStorage;
+const crStorage = chrome.storage.local;
 
 const template = document.getElementById("template");
 const main = document.getElementById("main");
@@ -43,18 +44,8 @@ async function onSubmitClick(e) {
   let value = e.target.previousElementSibling.value;
 
   storage.setItem(key, value);
+  await crStorage.set({ [key]: value });
   console.log(key, value);
 }
 
-console.log(chrome);
-console.log(localStorage);
-
-async function getCurrentTab() {
-  let queryOptions = { active: true, lastFocusedWindow: true };
-  // `tab` will either be a `tabs.Tab` instance or `undefined`.
-  let [tab] = await chrome.tabs.query(queryOptions);
-  console.log(tab);
-  return tab;
-}
-
-getCurrentTab()
+chrome.action.setPopup({ popup: "popup.html" });

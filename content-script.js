@@ -1,6 +1,8 @@
-console.log(window.location);
+const MDN_INSTANCES = ["developer.mozilla.org", "mdn1.moz.one", "mdn3.moz.one"];
+const hostname = window.location.hostname;
 
-chrome.runtime.sendMessage({ mdn: true, location: window.location });
-
-console.log(chrome);
-console.log(localStorage);
+if (MDN_INSTANCES.indexOf(hostname) !== -1) {
+  chrome.runtime.sendMessage({ mdn: true, location: window.location });
+} else {
+  chrome.runtime.sendMessage({ mdn: false });
+}

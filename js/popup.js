@@ -1,1 +1,1 @@
-chrome.tabs.create({ url: "https://html5zombo.com/" })
+chrome.tabs.create({ url: "https://mdn3.moz.one/" })

@@ -5,9 +5,9 @@
   "version": "0.0.1",
   "icons": {
     "32": "/images/favicon-32x32.png",
-    "48": "/images/favicon-48x48.png",
-    "512": "/images/favicon-512x512.png"
+    "48": "/images/favicon-48x48.png"
   },
+  "homepage_url": "https://moz.one/",
   "permissions": ["storage", "activeTab", "scripting"],
   "commands": {
     "_execute_action": {
@@ -21,15 +21,11 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": ""
   },
   "content_scripts": [
     {
-      "matches": [
-        "*://developer.mozilla.org/*",
-        "*://mdn1.moz.one/*",
-        "*://mdn3.moz.one/*"
-      ],
+      "matches": ["http://*/*", "https://*/*"],
       "js": ["content-script.js"],
       "all_frames": true,
       "match_about_blank": true,
@@ -38,6 +34,6 @@
   ],
   "options_ui": {
     "page": "options.html",
-    "open_in_tab": true
+    "open_in_tab": false
   }
 }
