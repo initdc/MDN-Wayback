@@ -1,4 +1,5 @@
 ts=$(date +%Y.%m.%d)
 pkg=mdn-wayback-$ts.zip
 
-zip $pkg -r background.js images LICENSE options.html js manifest.json popup.html
+# ls --sort=extension
+zip $pkg -r images js LICENSE options.html popup.html background.js manifest.json
